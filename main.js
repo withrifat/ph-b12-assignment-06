@@ -1,34 +1,42 @@
-
 // Fetch categories
 const CategoriesApi = () => {
-    fetch('https://openapi.programming-hero.com/api/categories')
-    .then(res => res.json())
-    .then(json => {
-        displayCategories(json.categories); 
+  fetch('https://openapi.programming-hero.com/api/categories')
+    .then((res) => res.json())
+    .then((json) => {
+      displayCategories(json.categories);
     })
-    .catch(err => console.error('Error fetching categories:', err));
-}
+    .catch((err) => console.error('Error fetching categories:', err));
+};
 
 // Fetch plants by category
 const loadLevelCard = (id) => {
-    console.log(id);
-    fetch(`https://openapi.programming-hero.com/api/category/${id}`)
-    .then(res => res.json())
-    .then(json => {
-        console.log(json.plants);
-        loadLevelCards(json.plants)
+  console.log(id);
+  fetch(`https://openapi.programming-hero.com/api/category/${id}`)
+    .then((res) => res.json())
+    .then((json) => {
+      console.log(json.plants);
+      loadLevelCards(json.plants);
     })
-    .catch(err => console.error('Error fetching plants:', err));
-}
+    .catch((err) => console.error('Error fetching plants:', err));
+};
+// all trees category default
+const allTreeCard = () => {
+  fetch(`https://openapi.programming-hero.com/api/plants`)
+    .then((res) => res.json())
+    .then((json) => {
+      loadLevelCards(json.plants);
+    })
+    .catch((err) => console.error('Error fetching all plants:', err));
+};
 
 // Render plant cards
 const loadLevelCards = (cards) => {
-    console.log(cards);
-    const createCard = document.getElementById('cards');
-    createCard.innerHTML = '';
-    cards.forEach((card) => {
-        const cardElement = document.createElement('div');
-        cardElement.innerHTML = `
+  console.log(cards);
+  const createCard = document.getElementById('cards');
+  createCard.innerHTML = '';
+  cards.forEach((card) => {
+    const cardElement = document.createElement('div');
+    cardElement.innerHTML = `
         <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 p-4 flex flex-col">
             <div class="h-40 md:h-48 lg:h-56 mb-4 overflow-hidden rounded-xl">
                 <img src="${card.image}" alt="${card.name}" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300 rounded-xl">
@@ -44,26 +52,37 @@ const loadLevelCards = (cards) => {
             </button>
         </div>
         `;
-        createCard.appendChild(cardElement);
-    });
-}
+    createCard.appendChild(cardElement);
+  });
+};
 
 // Render categories
 const displayCategories = (categories) => {
-    console.log(categories);
-    const wordContainer = document.getElementById('Categories');
-    wordContainer.innerHTML = ''; 
-    categories.forEach(category => {
-        const li = document.createElement('li'); 
-        li.innerHTML = `
+  console.log(categories);
+  const wordContainer = document.getElementById('Categories');
+  wordContainer.innerHTML = '';
+  // Extra "All Trees" button
+  const allTreesBtn = document.createElement('li');
+  allTreesBtn.innerHTML = `
+        <button onclick="allTreeCard()"  
+            class="w-full text-left px-3 py-2 hover:bg-green-700 hover:text-white text-black rounded-xl">
+            All Trees
+        </button>
+    `;
+  wordContainer.appendChild(allTreesBtn);
+  //other category
+  categories.forEach((category) => {
+    const li = document.createElement('li');
+    li.innerHTML = `
             <button onclick="loadLevelCard(${category.id})"  
                 class="w-full text-left px-3 py-2 hover:bg-green-700 hover:text-white text-black rounded-xl">
                 ${category.category_name}
             </button>
         `;
-        wordContainer.appendChild(li);
-    });
-}
+    wordContainer.appendChild(li);
+  });
+};
 
 // Initialize
 CategoriesApi();
+allTreeCard(); //default card
