@@ -139,6 +139,35 @@
                 </div>
             </div>
         </section>
+        <!-- Plant a Tree Section -->
+        <section class="w-full bg-[#166534] ">
+            <div class="container mx-auto my-16 px-4 md:px-8 py-8 text-center bg-[#166534]">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-8">Plant a Tree Today</h2>
+            <form class="bg-[#15803D] rounded-2xl p-8 md:p-12 shadow-lg space-y-6 max-w-2xl mx-auto">
+                <input
+                    class="w-full px-4 py-3 rounded-xl bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder-gray-500"
+                    type="text" placeholder="Your Name" required>
+                <input
+                    class="w-full px-4 py-3 rounded-xl bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder-gray-500"
+                    type="email" placeholder="Your Email Address" required>
+                <select
+                    class="w-full px-4 py-3 rounded-xl bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                    required>
+                    <option value="" disabled selected>Select number of trees</option>
+                    <option value="1">One for $5</option>
+                    <option value="2">Two for $10</option>
+                    <option value="3">Three for $15</option>
+                    <option value="5">Five for $25</option>
+                </select>
+                <button type="submit"
+                    class="w-full inline-block relative overflow-hidden rounded-2xl px-6 py-3 text-lg md:text-xl font-bold text-[#15803D] bg-[#FACC15] transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-xl">
+                    <span class="relative z-10">🌱 Donate Now</span>
+                    <span
+                        class="absolute inset-0 bg-yellow-400 translate-y-full transition-transform duration-300 ease-in-out hover:translate-y-0"></span>
+                </button>
+            </form>
+            </div>
+        </section>
         <script src="main.js"></script>
     </body>
 </html>
