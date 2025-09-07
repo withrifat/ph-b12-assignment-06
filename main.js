@@ -14,7 +14,6 @@ const loadLevelCard = (id) => {
   fetch(`https://openapi.programming-hero.com/api/category/${id}`)
     .then((res) => res.json())
     .then((json) => {
-      console.log(json.plants);
       loadLevelCards(json.plants);
     })
     .catch((err) => console.error('Error fetching plants:', err));
@@ -31,26 +30,27 @@ const allTreeCard = () => {
 
 // Render plant cards
 const loadLevelCards = (cards) => {
-  console.log(cards);
   const createCard = document.getElementById('cards');
   createCard.innerHTML = '';
   cards.forEach((card) => {
     const cardElement = document.createElement('div');
     cardElement.innerHTML = `
-        <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 p-4 flex flex-col">
-            <div class="h-40 md:h-48 lg:h-56 mb-4 overflow-hidden rounded-xl">
-                <img src="${card.image}" alt="${card.name}" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300 rounded-xl">
+            <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 p-4 flex flex-col h-[500px]">
+                <div class="h-44 md:h-52 lg:h-60 mb-4 overflow-hidden rounded-xl">
+                    <img src="${card.image}" alt="${card.name}" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300 rounded-xl">
+                </div>
+                <h3 class="font-bold text-lg md:text-xl mb-2 text-gray-800">${card.name}</h3>
+                <p class="text-sm md:text-base text-gray-600 mb-4 flex-1 overflow-hidden line-clamp-4">
+                    ${card.description}
+                </p>
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-xs md:text-sm bg-green-100 text-green-700 px-3 py-1 rounded-full">${card.category}</span>
+                    <span class="font-semibold text-gray-800 text-sm md:text-base">৳${card.price}</span>
+                </div>
+                <button class="btn bg-[#15803D] text-white w-full py-6 rounded-full text-base md:text-lg font-semibold hover:bg-green-600 transition-colors duration-300">
+                    Add to Cart
+                </button>
             </div>
-            <h3 class="font-bold text-lg md:text-xl mb-2 text-gray-800">${card.name}</h3>
-            <p class="text-sm md:text-base text-gray-600 mb-4 flex-1">${card.description}</p>
-            <div class="flex justify-between items-center mb-4">
-                <span class="text-xs md:text-sm bg-green-100 text-green-700 px-3 py-1 rounded-full">${card.category}</span>
-                <span class="font-semibold text-gray-800 text-sm md:text-base">৳${card.price}</span>
-            </div>
-            <button class="btn bg-[#15803D] text-white w-full py-6 rounded-full text-base md:text-lg font-semibold hover:bg-green-600 transition-colors duration-300">
-                Add to Cart
-            </button>
-        </div>
         `;
     createCard.appendChild(cardElement);
   });
@@ -58,7 +58,6 @@ const loadLevelCards = (cards) => {
 
 // Render categories
 const displayCategories = (categories) => {
-  console.log(categories);
   const wordContainer = document.getElementById('Categories');
   wordContainer.innerHTML = '';
   // Extra "All Trees" button
