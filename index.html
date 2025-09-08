@@ -80,20 +80,33 @@
                     <main id="cards" class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         <!-- dynamic  card from js -->
                     </main>
+                    <!-- modal -->
+                    <dialog id="plant_modal" class="modal">
+                    <div class="modal-box max-w-2xl">
+                        <div id="modal-content"></div>
+                        <div class="modal-action">
+                        <form method="dialog">
+                            <button class="btn">Close</button>
+                        </form>
+                        </div>
+                    </div>
+                    </dialog>
                     <!-- Right Sidebar: Cart -->
                     <aside class="lg:col-span-3 bg-white rounded-lg shadow p-4">
                         <h3 class="font-bold py-2 text-xl ">Your Cart</h3>
-                        <ul class="space-y-2 mb-4">
-                            <li class="flex justify-between items-center bg-green-50 px-3 py-2 rounded">
-                                <span>Mango Tree</span>
-                                <span>৳500 × 1 <button class="text-gray-500 ml-2">&times;</button></span>
-                            </li>
-                            <li class="flex justify-between items-center bg-green-50 px-3 py-2 rounded">
-                                <span>Guava Tree</span>
-                                <span>৳500 × 1 <button class="text-gray-500 ml-2">&times;</button></span>
-                            </li>
-                        </ul>
-                        <div class="font-semibold text-lg">Total: ৳1000</div>
+                        <div id="cartContent" class="">
+                            <ul class="space-y-2 mb-4">
+                                <li class="flex justify-between items-center bg-green-50 px-3 py-2 rounded">
+                                    <span>Mango Tree</span>
+                                    <span>৳500 × 1 <button class="text-gray-500 ml-2">&times;</button></span>
+                                </li>
+                                <li class="flex justify-between items-center bg-green-50 px-3 py-2 rounded">
+                                    <span>Guava Tree</span>
+                                    <span>৳500 × 1 <button class="text-gray-500 ml-2">&times;</button></span>
+                                </li>
+                            </ul>
+                            <div class="font-semibold text-lg">Total: ৳1000</div>
+                        </div>
                     </aside>
                 </div>
             </div>
