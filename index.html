@@ -53,7 +53,8 @@
                 class="absolute bottom-0 right-4 w-56 md:w-[18rem] lg:w-[28rem]" />
             <div class="max-w-2xl z-10">
                 <h1
-                    class="text-3xl md:text-5xl text-center lg:text-6xl font-extrabold text-black mb-4 whitespace-nowrap">Plant a Tree, Grow a Future </h1>
+                    class="text-3xl md:text-5xl text-center lg:text-6xl font-extrabold text-black mb-4 whitespace-nowrap">
+                    Plant a Tree, Grow a Future </h1>
                 <p class="text-base md:text-lg lg:text-xl text-gray-700 mb-8"> Join our mission to plant 1 million trees
                     and make the Earth greener for future generations. </p>
                 <a href="#"
@@ -77,24 +78,26 @@
                     </aside>
                     <!-- Main Content: Product Grid -->
                     <main id="cards" class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- loading  -->
+                        <span id="loading" class="loading loading-dots loading-xl hidden"></span>
                         <!-- dynamic  card from js -->
                     </main>
                     <!-- modal -->
                     <dialog id="plant_modal" class="modal">
-                    <div class="modal-box max-w-2xl">
-                        <div id="modal-content"></div>
-                        <div class="modal-action">
-                        <form method="dialog">
-                            <button class="btn">Close</button>
-                        </form>
+                        <div class="modal-box max-w-2xl">
+                            <div id="modal-content"></div>
+                            <div class="modal-action">
+                                <form method="dialog">
+                                    <button class="btn">Close</button>
+                                </form>
+                            </div>
                         </div>
-                    </div>
                     </dialog>
                     <!-- Right Sidebar: Cart -->
                     <aside class="lg:col-span-3 bg-white rounded-lg shadow p-4">
                         <h3 class="font-bold py-2 text-xl ">Your Cart</h3>
                         <div id="cartContent" class="">
-                                 <!-- dynamic content -->
+                            <!-- dynamic content -->
                         </div>
                     </aside>
                 </div>
