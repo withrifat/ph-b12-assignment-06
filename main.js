@@ -1,3 +1,4 @@
+let cart = [];
 // Fetch categories
 const CategoriesApi = () => {
   fetch('https://openapi.programming-hero.com/api/categories')
@@ -33,6 +34,47 @@ const removeActive = () => {
   const buttons = document.querySelectorAll('.category-btn');
   buttons.forEach(btn => btn.classList.remove('active'));
 };
+// add to cart
+const addToCart = (plant) => {
+  const existingItem = cart.find(item => item.id === plant.id);
+  if (existingItem) {
+    existingItem.quantity += 1;
+  } else {
+    cart.push({...plant, quantity: 1});
+  }
+  renderCart();
+};
+const renderCart = () => {
+  const cartDiv = document.getElementById('cartContent');
+  cartDiv.innerHTML = ''; 
+  let total = 0;
+  cart.forEach((item, index) => {
+    total += item.price * item.quantity;
+    const li = document.createElement('li');
+    li.classList.add('flex', 'justify-between', 'items-center', 'bg-green-50', 'px-3', 'py-2', 'rounded', 'mb-2');
+    li.innerHTML = `
+      <span>${item.name}</span>
+      <span>৳${item.price} × ${item.quantity} 
+        <button class="text-gray-500 ml-2 remove-btn" data-index="${index}">&times;</button>
+      </span>
+    `;
+    cartDiv.appendChild(li);
+  });
+  const totalDiv = document.createElement('div');
+  totalDiv.classList.add('font-semibold', 'text-lg', 'mt-2');
+  totalDiv.textContent = `Total: ৳${total}`;
+  cartDiv.appendChild(totalDiv);
+  const removeButtons = cartDiv.querySelectorAll('.remove-btn');
+  removeButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const index = btn.dataset.index;
+      cart.splice(index, 1);
+      renderCart();
+    });
+  });
+};
+// end add to cart 
+
 // Open modal with plant details (fetching from API)
 const openPlantModal = (id) => {
   fetch(`https://openapi.programming-hero.com/api/plant/${id}`)
@@ -41,14 +83,24 @@ const openPlantModal = (id) => {
       const plant = data.plants; 
       const modalContent = document.getElementById('modal-content');
       modalContent.innerHTML = `
-        <div class="space-y-4">
-          <img src="${plant.image}" alt="${plant.name}" class="w-full h-64 object-cover rounded-lg">
-          <h2 class="text-2xl font-bold text-gray-800">${plant.name}</h2>
-          <p class="text-gray-600">${plant.description}</p>
-          <div class="flex justify-between items-center">
-            <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full">${plant.category}</span>
-            <span class="font-semibold text-lg text-gray-800">৳${plant.price}</span>
-          </div>
+        <div class="space-y-4 p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow">
+        <img src="${plant.image}" alt="${plant.name}" class="w-full h-64 object-cover rounded-lg">
+        <h2 class="text-2xl font-bold text-gray-900 tracking-wide">
+            ${plant.name}
+        </h2>
+        <p class="text-gray-600 leading-relaxed">
+            ${plant.description}
+        </p>
+        <div>
+            <span class="inline-block bg-green-100  px-4 py-1 rounded-full text-xl font-semibold text-gray-800 mt-2">
+            ${plant.category}
+            </span>
+        </div>
+        <div>
+            <span class="block text-xl font-semibold text-gray-800 mt-2">
+            Price: ৳${plant.price}
+            </span>
+        </div>
         </div>
       `;
 
@@ -89,6 +141,10 @@ const loadLevelCards = (cards) => {
     cardElement.querySelector(".plant-name").addEventListener("click", (e) => {
       const plantId = e.target.dataset.id;
       openPlantModal(plantId);
+    });
+    // Add to Cart
+    cardElement.querySelector(".btn").addEventListener("click", () => {
+      addToCart(card);
     });
 
     createCard.appendChild(cardElement);
