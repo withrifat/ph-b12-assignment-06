@@ -43,6 +43,8 @@ const addToCart = (plant) => {
     cart.push({...plant, quantity: 1});
   }
   renderCart();
+  // alert for add to cart
+  alert(`${plant.name} add into cart`)
 };
 const renderCart = () => {
   const cartDiv = document.getElementById('cartContent');
