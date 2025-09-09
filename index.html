@@ -76,10 +76,13 @@
                         <ul id="Categories" class="flex flex-col space-y-2 text-sm md:text-base">
                         </ul>
                     </aside>
+                    <!-- add spinner -->
+                    <div id="spinner" class="lg:col-span-7 flex justify-center items-center hidden">
+                        <span id="loading" class="loading loading-dots loading-xl"></span>
+                    </div>
                     <!-- Main Content: Product Grid -->
-                    <main id="cards" class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <main id="cards" class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ">
                         <!-- loading  -->
-                        <span id="loading" class="loading loading-dots loading-xl hidden"></span>
                         <!-- dynamic  card from js -->
                     </main>
                     <!-- modal -->
@@ -175,7 +178,7 @@
         <footer class="bg-[#14532D] text-white py-6 text-center">
             <h3 class="text-lg font-semibold"> © 2025 Green Earth. All Rights Reserved. </h3>
         </footer>
-        <script src="main.js"></script>
-        <!-- <script src="test.js"></script> -->
+        <!-- <script src="main.js"></script> -->
+        <script src="test.js"></script>
     </body>
 </html>
