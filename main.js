@@ -11,22 +11,32 @@ const CategoriesApi = () => {
 
 // Fetch plants by category
 const loadLevelCard = (id) => {
+  manageSpinner(true)
   fetch(`https://openapi.programming-hero.com/api/category/${id}`)
     .then((res) => res.json())
     .then((json) => {
       loadLevelCards(json.plants);
+      manageSpinner(false)
     })
-    .catch((err) => console.error('Error fetching plants:', err));
+    .catch((err) => {
+      console.error('Error fetching plants:', err)
+      manageSpinner(false)
+    });
 };
 
 // All trees category default
 const allTreeCard = () => {
+  manageSpinner(true)
   fetch(`https://openapi.programming-hero.com/api/plants`)
     .then((res) => res.json())
     .then((json) => {
       loadLevelCards(json.plants);
+      manageSpinner(false)
     })
-    .catch((err) => console.error('Error fetching all plants:', err));
+    .catch((err) =>{ 
+      console.error('Error fetching all plants:', err)
+      manageSpinner(false)
+    });
 };
 
 // Active button helper
@@ -34,6 +44,16 @@ const removeActive = () => {
   const buttons = document.querySelectorAll('.category-btn');
   buttons.forEach(btn => btn.classList.remove('active'));
 };
+//  spinner
+const manageSpinner = (status)=>{
+  if(status==true){
+    document.getElementById('spinner').classList.remove('hidden');
+    document.getElementById('cards').classList.add('hidden');
+  } else{
+    document.getElementById('cards').classList.remove('hidden');
+    document.getElementById('spinner').classList.add('hidden');
+  }
+}
 // add to cart
 const addToCart = (plant) => {
   const existingItem = cart.find(item => item.id === plant.id);
@@ -79,6 +99,7 @@ const renderCart = () => {
 
 // Open modal with plant details (fetching from API)
 const openPlantModal = (id) => {
+  manageSpinner(true)
   fetch(`https://openapi.programming-hero.com/api/plant/${id}`)
     .then(res => res.json())
     .then(data => {
@@ -107,12 +128,18 @@ const openPlantModal = (id) => {
       `;
 
       document.getElementById('plant_modal').showModal();
+      manageSpinner(false)
     })
-    .catch(err => console.error("Error fetching plant details:", err));
+
+    .catch(err => {
+      console.error("Error fetching plant details:", err)
+      manageSpinner(false)
+    });
 };
 
 
 const loadLevelCards = (cards) => {
+
   const createCard = document.getElementById('cards');
   createCard.innerHTML = '';
 
@@ -151,6 +178,7 @@ const loadLevelCards = (cards) => {
 
     createCard.appendChild(cardElement);
   });
+
 };
 
 
